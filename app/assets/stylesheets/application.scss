@@ -27,3 +27,19 @@ header .container {
 footer .mx-auto{
   text-align: center;
 }
+
+.notice{
+  color: green;
+}
+.success{
+  color: green;
+}
+.devise-error-messages {
+  color: red;
+  list-style: none;
+}
+.alert-danger {
+  color: red;
+  background-color: #fff;
+  border: 0;
+}

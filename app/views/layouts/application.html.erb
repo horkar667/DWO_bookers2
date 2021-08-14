@@ -13,7 +13,7 @@
   <body>
     <header>
       <nav class="navber navbar-expand-lg navbar-dark bg-dark">
-        <div class="container mt">
+        <div class="container">
           <a class="navbar-brand" href="/">Bookers</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -52,6 +52,9 @@
         </div>
       </nav>
     </header>
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "#{key}") %>
+    <% end %>
     <%= yield %>
     <footer>
       <div class='container mt-5'>
