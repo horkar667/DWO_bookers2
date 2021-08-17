@@ -1,22 +1,25 @@
 class UsersController < ApplicationController
+  before_action :require_login
+  before_action :ensure_current_user, {only: [:edit]}
+
   def index
-    @user=User.find(current_user.id)
-    @users=User.all
+    @user=current_user
     @book=Book.new
+    @users=User.all
   end
 
   def show
-    @user=User.find(current_user.id)
+    @user=User.find(params[:id])
     @books=Book.where(user_id: @user.id)
     @book=Book.new
   end
 
   def edit
-    @user=User.find(current_user.id)
+    @user=User.find(params[:id])
   end
 
   def update
-    @user=User.find(current_user.id)
+    @user=current_user
     if @user.update(user_params)
      redirect_to user_path(current_user.id)
      flash[:success]="You have updated user successfully."

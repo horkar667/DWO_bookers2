@@ -1,14 +1,16 @@
 class BooksController < ApplicationController
+  before_action :require_login
+  before_action :ensure_current_user_book, {only: [:edit]}
+
   def index
     @book=Book.new
-    @user=User.find(current_user.id)
-    @books=Book.where(user_id: @user.id)
+    @user=current_user
+    @books=Book.all
   end
 
   def show
-    @user=User.find(current_user.id)
-    @user_book=Book.find(params[:id])
-    @book=Book.new
+    @book=Book.find(params[:id])
+    @book_new=Book.new
   end
 
   def create
@@ -18,8 +20,8 @@ class BooksController < ApplicationController
       flash[:success]="You have created book successfully."
       redirect_to book_path(@book.id)
     else
-      @user=User.find(current_user.id)
-      @books=Book.where(user_id: @user.id)
+      @user=current_user
+      @books=Book.all
       render "books/index"
     end
   end
@@ -50,3 +52,10 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title,:body,:user_id)
   end
 end
+
+  def ensure_current_user_book
+    book = Book.find(params[:id])
+    if current_user.id != book.user.id
+     redirect_to books_path
+    end
+  end
