@@ -9,10 +9,14 @@ table tr {
   border-top: 1px solid gray;
 }
 
-.table {;
+.table {
   width: 100%;
 }
 
 .show-form {
   margin-bottom: 16px;
+}
+
+.table-comments tr {
+  border-top: 0;
 }
