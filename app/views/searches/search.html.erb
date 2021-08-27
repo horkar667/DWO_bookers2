@@ -1,0 +1,8 @@
+<% if @custom == "Book" %>
+  <%= render 'searches/book', books: @records %>
+<% elsif @custom == "User" %>
+  <%= render 'searches/user', users: @records %>
+<% else %>
+存在しません
+<% end %>
+

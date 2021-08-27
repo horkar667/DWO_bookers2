@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'search' => "searches#search"
   get 'favorites/create'
   get 'favorites/destroy'
   devise_for :users
