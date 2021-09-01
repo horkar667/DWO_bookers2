@@ -1,8 +1,10 @@
-<% if @custom == "Book" %>
-  <%= render 'searches/book', books: @records %>
-<% elsif @custom == "User" %>
+<% if @model == 'user' %>
+  <h3>Users search for"<%= @content %>"</h3>
   <%= render 'searches/user', users: @records %>
-<% else %>
-存在しません
-<% end %>
+<% elsif @model == 'book' %>
+  <h3>Books search for"<%= @content %>"</h3>
+  <%= render 'searches/book', books: @records %>
 
+<% else %>
+none
+<% end %>

@@ -1,33 +1,34 @@
 class SearchesController < ApplicationController
   def search
-    @custom = params["custom"]
-    @body = params["body"]
-    @option = params["option"]
-    @records = search_for(@custom, @body, @option)
+    @model = params["model"]
+    @content = params["content"]
+    @method = params["method"]
+    @records = search_for(@model, @content, @method)
   end
 
   private
-  def search_for(custom, body, option)
-    if custom == 'User'
-      if option == 'perfect'
-        User.where(name: body)
-      elsif option == "forward"
-        User.where('name LIKE ?', "#{body}%")
-      elsif option == "backword"
-        User.where("name LIKE ?" "%#{body}")
-      elsif option == "partial"
-        User.where("name LIKE ?" "%#{body}%")
+  def search_for(model, content, method)
+    if model == 'user'
+      if method == 'perfect'
+        User.where(name: content)
+      elsif method == 'forward'
+        User.where('name LIKE ?', "#{content}%")
+      elsif method == 'rear'
+        User.where('name LIKE ?', "%#{content}")
+      elsif method == 'partial'
+        User.where('name LIKE ?', "%#{content}%")
       end
-    elsif custom == 'Book'
-      if option == 'perfect'
-        Book.where(body: body)
-      elsif option == "forward"
-        Book.where('body LIKE ?', "#{body}%")
-      elsif option == "backword"
-        Book.where('body LIKE ?', "%#{body}")
-      elsif option == "forward"
-        Book.where('body LIKE ?', "%#{body}%")
+    elsif model == 'book'
+      if method == 'perfect'
+        Book.where(body: content)
+      elsif method == 'forward'
+        Book.where('body LIKE ?', "#{content}%")
+      elsif method == 'rear'
+        Book.where('body LIKE ?', "%#{content}")
+      elsif method == 'partial'
+        Book.where('body LIKE ?', "%#{content}%")
       end
     end
   end
+
 end

@@ -57,12 +57,12 @@
     <%= content_tag(:div, value, class: "#{key}") %>
     <% end %>
     <% if user_signed_in? %>
-      <%= form_with url: search_path, method: :get, local: true do |f| %>
-        <%= f.search_field :body %>
-        <%= f.select :custom, [["User","User"],["Book","Book"]] %>
-        <%= f.select :option, [["完全一致","perfect"],["前方一致","forward"],["後方一致","backword"],["部分一致","partial"]] %>
-        <%= f.submit "検索" %>
-      <% end %>
+    <%= form_tag(search_path, method: :get) do %>
+      <%= text_field_tag 'content' %>
+      <%= select_tag 'model', options_for_select({ "User" => "user", "Book" => "book" }) %>
+      <%= select_tag 'method', options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "rear", "部分一致" => "partial" }) %>
+      <%= submit_tag '検索' %>
+    <% end %>
     <% end %>
     <%= yield %>
     <footer>
